@@ -1,8 +1,12 @@
 {
+  "name": "node-farm",
   "dependencies": {
-    "nodemon": "^2.0.12"
+    "slugify": "^1.6.0"
   },
   "scripts": {
-    "start": "nodemon index.js"
+    "dev": "nodemon index.js"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.12" 
   }
 }
