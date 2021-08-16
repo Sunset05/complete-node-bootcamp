@@ -21,6 +21,23 @@ const writeFilePromise = (file, data) => {
   });
 };
 
+const getDogPic = async () => {
+  try{
+    const data = await readFilePromise(`${__dirname}/dog.txt`);
+    console.log(`Breed: ${data}`);
+  
+    const result = await superagent.get(`https://dog.ceo/api/breed/${data}/images/random`)
+    console.log(result.body.message);
+  
+    await writeFilePromise("dog-img.txt", result.body.message);
+    console.log('Random dog image saved to file.')
+  } catch(error){
+    console.log(error)
+  }
+}
+
+getDogPic();
+/*
 readFilePromise(`${__dirname}/dog.txt`)
   .then((data) => {
     console.log(`Breed: ${data}`);
@@ -37,3 +54,4 @@ readFilePromise(`${__dirname}/dog.txt`)
   .catch((error) => {
     console.log(error.message);
   });
+*/
