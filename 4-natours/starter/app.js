@@ -1,14 +1,19 @@
 const express = require('express');
 const morgan = require('morgan');
 
-const app = express();
-
 const { tourRouter } = require(`${__dirname}/routes/tourRoutes`);
 const { userRouter } = require(`${__dirname}/routes/userRoutes`);
 
+const app = express();
+
 // 1) MIDDLEWARE
-app.use(morgan('dev'));
+//only logs when in development
+if (process.env.NODE_ENV === 'development') {
+  app.use(morgan('dev'));
+}
+
 app.use(express.json());
+app.use(express.static(`${__dirname}/public`));
 
 app.use((request, response, next) => {
   console.log('Hello from the middleware');

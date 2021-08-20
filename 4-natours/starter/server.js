@@ -1,6 +1,10 @@
+//read variables from file and save them as environment variables
+const dotenv = require('dotenv');
+dotenv.config({ path: './config.env' });
+
 const app = require('./app');
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 app.listen(port, () => {
-  console.log(`LISTENING ON PORT ${port}`);
+  console.log(`App running on port ${port}`);
 });

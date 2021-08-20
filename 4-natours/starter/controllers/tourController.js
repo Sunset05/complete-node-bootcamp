@@ -5,10 +5,24 @@ const tours = JSON.parse(
 );
 
 exports.checkID = (request, response, next, value) => {
+  console.log(`Tour id is: ${value}`);
+
   if (request.params.id * 1 > tours.length) {
     return response.status(404).json({
       status: 'fail',
       message: 'Invalid ID',
+    });
+  }
+  next();
+};
+
+exports.checkBody = (request, response, next) => {
+  console.log(request.body);
+
+  if (!request.body.name || !request.body.price) {
+    return response.status(400).json({
+      status: 'fail',
+      message: 'Missing name or price',
     });
   }
   next();
